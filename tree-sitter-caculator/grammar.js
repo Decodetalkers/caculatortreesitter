@@ -28,7 +28,12 @@ module.exports = grammar({
 			'/',
 		),
 		block: $ => seq(
-			'(',
+			choice(
+				'(',
+				'sin(',
+				'cos(',
+				'tan('
+			),
 			$._unint,
 			repeat(
 				$._aboveall,

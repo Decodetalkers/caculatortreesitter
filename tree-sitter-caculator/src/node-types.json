@@ -88,7 +88,19 @@
     "named": false
   },
   {
+    "type": "cos(",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "sin(",
+    "named": false
+  },
+  {
+    "type": "tan(",
+    "named": false
   }
 ]

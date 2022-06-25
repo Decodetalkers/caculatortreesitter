@@ -179,7 +179,7 @@ fn getanswer(input: Node, source: &str) -> i32 {
 //}
 
 fn main() {
-    let source = "11/11+(9*(2*6 / 4))";
+    let source = "11/11+sin(9*(2*6 / 4))";
     //let source = "1*5/5 + 9";
     //let source = "2-2*1";
     let mut parser = tree_sitter::Parser::new();
