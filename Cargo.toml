@@ -1,0 +1,10 @@
+[package]
+name = "caculator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tree_sitter_cac = {path = "tree_sitter_cac"}
+tree-sitter = "0.20.7"
