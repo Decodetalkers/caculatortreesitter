@@ -1,8 +1,10 @@
 import { Button, VerticalBox,HorizontalBox,Slider,GridBox,TextEdit } from "std-widgets.slint";
+
 export AppWindow := Window {
 	title: "Caculator";
 	property <string> input : "" ;
 	property <bool> number : false;
+	property <bool> cannumber: true ;
 	property <int> brackets : 0 ;
 	callback caculate();
 	callback caculater(string);
@@ -10,7 +12,7 @@ export AppWindow := Window {
 		output.text = getput;
 	}
 	VerticalBox { 
-		if (brackets !=0) :  Text{
+		if (brackets !=0) : Text{
 			horizontal-alignment: center;
 			text: "illegal";
 			max-height: 20px;
@@ -20,7 +22,7 @@ export AppWindow := Window {
 			text: input;
 			font-size: 20px;
 			max-height: 200px;
-			wrap: word-wrap;
+			wrap: no-wrap;
 			enabled: false;
 		}
 		output := TextEdit { 
@@ -40,6 +42,7 @@ export AppWindow := Window {
 				clicked => { 
 					input = "";
 					number = false;
+					cannumber = true;
 					brackets = 0;
 				}
 			}
@@ -51,6 +54,7 @@ export AppWindow := Window {
 					if(number) {
 						input += "/";
 						number = false;
+						cannumber = true;
 					}
 				}
 			}
@@ -62,6 +66,7 @@ export AppWindow := Window {
 					if(number) {
 						input += "*";
 						number = false;
+						cannumber = true;
 					}
 				}
 			}
@@ -70,36 +75,44 @@ export AppWindow := Window {
 				col: 0;
 				row: 1;
 				text: "7";
-				clicked => { 
-					input += "7";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "7";
+						number = true;
+					}
 				}
 			}
 			Button { 
 				col: 1;
 				row: 1;
 				text: "8";
-				clicked => { 
-					input += "8";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "8";
+						number = true;
+					}
 				}
 			}
 			Button { 
 				col: 2;
 				row: 1;
 				text: "9";
-				clicked => { 
-					input += "9" ;
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "9" ;
+						number = true;
+					}
 				}
 			}
 			Button { 
 				col: 0;
 				row: 2;
 				text: "4";
-				clicked => { 
-					input += "4";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "4";
+						number = true;
+					}
 				}
 			}
 			Button { 
@@ -107,8 +120,10 @@ export AppWindow := Window {
 				row: 2;
 				text: "5";
 				clicked => { 
-					input += "5";
-					number = true;
+					if(cannumber) {
+						input += "5";
+						number = true;
+					}
 				}
 			}
 			Button { 
@@ -116,17 +131,21 @@ export AppWindow := Window {
 				row: 2;
 				text: "6";
 				clicked => { 
-					input += "6";
-					number = true;
+					if(cannumber) {
+						input += "6";
+						number = true;
+					}
 				}
 			}
 			Button { 
 				col: 0;
 				row: 3;
 				text: "1";
-				clicked => { 
-					input += "1";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "1";
+						number = true;
+					}
 				}
 			}
 			Button { 
@@ -134,17 +153,21 @@ export AppWindow := Window {
 				row: 3;
 				text: "2";
 				clicked => {
-					input += "2";
-					number = true;
+					if(cannumber) {
+						input += "2";
+						number = true;
+					}
 				}
 			}
 			Button { 
 				col: 2;
 				row: 3;
 				text: "3";
-				clicked => { 
-					input += "3";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "3";
+						number = true;
+					}
 				}
 			}
 			Button { 
@@ -163,9 +186,11 @@ export AppWindow := Window {
 				//colspan: 3;
 				row: 4;
 				text: "0";
-				clicked => { 
-					input += "0";
-					number = true;
+				clicked => {
+					if(cannumber) {
+						input += "0";
+						number = true;
+					}
 				}
 			}
 			Button { 
@@ -177,6 +202,7 @@ export AppWindow := Window {
 					if(brackets>0 && number) {
 						input += ")";
 						brackets -=1;
+						cannumber = false;
 					}
 					
 				}
@@ -196,6 +222,7 @@ export AppWindow := Window {
 					if(number) {
 						input += "-";
 						number = false;
+						cannumber = true;
 					}
 				}
 			}
@@ -207,6 +234,7 @@ export AppWindow := Window {
 					if(number) {
 						input += "+";
 						number = false;
+						cannumber = true;
 					}
 				}
 			}
