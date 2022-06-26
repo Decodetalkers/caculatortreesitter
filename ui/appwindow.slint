@@ -1,0 +1,153 @@
+import { Button, VerticalBox,HorizontalBox,Slider,GridBox,TextEdit } from "std-widgets.slint";
+export AppWindow := Window {
+	title: "Caculator";
+	property <string> input : "" ;
+	callback caculate();
+	callback caculater(string);
+	caculater(getput) => { 
+		output.text = getput;
+	}
+	VerticalBox { 
+		TextEdit { 
+			text: input;
+			font-size: 20px;
+			max-height: 200px;
+			wrap: word-wrap;
+			enabled: false;
+		}
+		output := TextEdit { 
+			text: "";
+			font-size: 20px;
+			max-height: 100px;
+			wrap: word-wrap;
+			enabled: false;
+		}
+		// caculator
+		GridBox { 
+			Button { 
+				col: 0;
+				row: 0;
+				text: "C";
+				clicked => { input = "" }
+			}
+			Button { 
+				col: 1;
+				row: 0;
+				text: "/";
+				clicked => { input += "/" }
+			}
+			Button { 
+				col: 2;
+				row: 0;
+				text: "*";
+				clicked => { input += "*" }
+			}
+
+			Button { 
+				col: 0;
+				row: 1;
+				text: "7";
+				clicked => { input += "7" }
+			}
+			Button { 
+				col: 1;
+				row: 1;
+				text: "8";
+				clicked => { input += "8" }
+			}
+			Button { 
+				col: 2;
+				row: 1;
+				text: "9";
+				clicked => { input += "9" }
+			}
+			Button { 
+				col: 0;
+				row: 2;
+				text: "4";
+				clicked => { input += "4" }
+			}
+			Button { 
+				col: 1;
+				row: 2;
+				text: "5";
+				clicked => { input += "5" }
+			}
+			Button { 
+				col: 2;
+				row: 2;
+				text: "6";
+				clicked => { input += "6" }
+			}
+			Button { 
+				col: 0;
+				row: 3;
+				text: "1";
+				clicked => { input += "1" }
+			}
+			Button { 
+				col: 1;
+				row: 3;
+				text: "2";
+				clicked => { input += "2" }
+			}
+			Button { 
+				col: 2;
+				row: 3;
+				text: "3";
+				clicked => { input += "3" }
+			}
+			Button { 
+				col: 0;
+				//colspan: 3;
+				row: 4;
+				text: "(";
+				clicked => { input += "(" }
+			}
+			Button { 
+				col: 1;
+				//colspan: 3;
+				row: 4;
+				text: "0";
+				clicked => { input += "0" }
+			}
+			Button { 
+				col: 2;
+				//colspan: 3;
+				row: 4;
+				text: ")";
+				clicked => { input += ")" }
+			}
+			Button { 
+				col: 3;
+				row: 0;
+				text: "<-";
+				clicked => { 
+				}
+			}
+			Button { 
+				col: 3;
+				row: 1;
+				text: "-";
+				clicked => { 
+					input += "-";
+				}
+			}
+			Button { 
+				col: 3;
+				row: 2;
+				text: "+";
+				clicked => { 
+					input += "+";
+				}
+			}
+			Button { 
+				col:3;
+				row: 3;
+				rowspan:2;
+				text: "=";
+				clicked => { caculate() }
+			}
+		}
+	}
+}

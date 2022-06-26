@@ -1,4 +1,6 @@
+use slint::SharedString;
 use tree_sitter::Node;
+slint::include_modules!();
 enum Math0 {
     Add,
     Delete,
@@ -106,92 +108,41 @@ fn getanswer(input: Node, source: &str) -> i32 {
         output
     }
 }
-
-//fn getnumber(input: Node, source: &str) -> i32 {
-//    let mut output = 0;
-//    if input.child_count() == 0 {
-//        0
-//    } else {
-//        let mut course = input.walk();
-//        let mut cross = false;
-//        let mut temp = 0;
-//        let mut crossnumber = 1;
-//        for node in input.children(&mut course) {
-//            match node.kind() {
-//                "math0" => {
-//                    if cross {
-//                        output += crossnumber * temp;
-//                        cross = false;
-//                        crossnumber = 1;
-//                    } else {
-//                        output += temp;
-//                    }
-//                }
-//                "math1" => {
-//                    cross = true;
-//                    crossnumber *= temp;
-//                }
-//                "number" => {
-//                    let start = node.start_position().column;
-//                    let end = node.end_position().column;
-//                    let num = &source[start..end].parse::<i32>().unwrap();
-//                    temp = *num;
-//                    //output += num;
-//                }
-//                "block" => {
-//                    temp = getnumber(node, source);
-//                }
-//                _ => {}
-//            }
-//        }
-//        if cross {
-//            output += crossnumber * temp;
-//        } else {
-//            output += temp;
-//        }
-//        output
-//    }
-//}
-//
-//fn get_number(input: Node, source: &str) -> i32 {
-//    let mut output = 0;
-//    if input.child_count() == 0 {
-//        0
-//    } else {
-//        let mut course = input.walk();
-//        for node in input.children(&mut course) {
-//            match node.kind() {
-//                "math0" | "math1" => {}
-//                "number" => {
-//                    let start = node.start_position().column;
-//                    let end = node.end_position().column;
-//                    let num = &source[start..end].parse::<i32>().unwrap();
-//                    output += num;
-//                }
-//                "block" => {
-//                    output += get_number(node, source);
-//                }
-//                _ => {}
-//            }
-//        }
-//        output
-//    }
-//}
-
 fn main() {
-    let source = "11/11+sin(9*(2*6 / 4))";
+    //let source = "11/11+sin(9*(2*6 / 4))";
     //let source = "1*5/5 + 9";
     //let source = "2-2*1";
-    let mut parser = tree_sitter::Parser::new();
-    parser.set_language(tree_sitter_cac::language()).unwrap();
-    let tree = parser.parse(source, None).unwrap();
-    let tree_node = tree.root_node();
+
     //let a = get_number(tree_node, source);
     //println!("{a}");
     //let a = getnumber(tree_node, source);
     //println!("{a}");
-    let a = getanswer(tree_node, source);
-    println!("{a}");
+    //let a = getanswer(tree_node, source);
+    //println!("{a}");
+    let ui = AppWindow::new();
+    let ui_handle = ui.as_weak();
+    ui.on_caculate(move || {
+        let ui = ui_handle.unwrap();
+        let source = ui.get_input().to_string();
+        let mut parser = tree_sitter::Parser::new();
+        parser.set_language(tree_sitter_cac::language()).unwrap();
+        let tree = parser.parse(&source, None).unwrap();
+        let tree_node = tree.root_node();
+        let a = getanswer(tree_node, &source);
+        ui.invoke_caculater(SharedString::from(a.to_string()));
+    });
+    //ui.on_caculate(move ||{
+    //    let ui = ui_handle.unwrap();
+
+    //});
+
+    //let ui_handle = ui.as_weak();
+    //ui.on_request_increase_value(move || {
+    //    let ui = ui_handle.unwrap();
+    //    ui.set_counter(ui.get_counter() + 1);
+    //});
+
+    ui.run();
     //println!("Hello, world!");
 }
 #[cfg(test)]
