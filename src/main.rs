@@ -9,17 +9,17 @@ enum Math1 {
     Cross,
     Division,
 }
-fn getanswer(input: Node, source: &str) -> i32 {
-    let mut output = 0;
+fn getanswer(input: Node, source: &str) -> f64 {
+    let mut output = 0.0;
     if input.child_count() == 0 {
-        0
+        0.0
     } else {
         let mut course = input.walk();
         let mut cross = false;
         let mut crossmethod = Math1::Cross;
         let mut addmethod = Math0::Add;
-        let mut temp = 0;
-        let mut crossnumber = 1;
+        let mut temp = 0.0;
+        let mut crossnumber = 1.0;
         for node in input.children(&mut course) {
             match node.kind() {
                 "math0" => {
@@ -34,7 +34,7 @@ fn getanswer(input: Node, source: &str) -> i32 {
                                     Math1::Division => output += crossnumber / temp,
                                 }
                                 cross = false;
-                                crossnumber = 1;
+                                crossnumber = 1.0;
                                 crossmethod = Math1::Cross;
                             } else {
                                 output += temp;
@@ -48,7 +48,7 @@ fn getanswer(input: Node, source: &str) -> i32 {
                                 }
                                 //output -= crossnumber * temp;
                                 cross = false;
-                                crossnumber = 1;
+                                crossnumber = 1.0;
                                 crossmethod = Math1::Cross;
                             } else {
                                 output -= temp;
@@ -79,7 +79,7 @@ fn getanswer(input: Node, source: &str) -> i32 {
                 "number" => {
                     let start = node.start_position().column;
                     let end = node.end_position().column;
-                    let num = &source[start..end].parse::<i32>().unwrap();
+                    let num = &source[start..end].parse::<f64>().unwrap();
                     temp = *num;
                     //output += num;
                 }
