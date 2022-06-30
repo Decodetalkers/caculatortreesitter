@@ -317,7 +317,7 @@ dependencies = [
  "slint",
  "slint-build",
  "tree-sitter",
- "tree_sitter_cac",
+ "tree-sitter-cac",
 ]
 
 [[package]]
@@ -3158,8 +3158,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "tree_sitter_cac"
-version = "0.1.0"
+name = "tree-sitter-cac"
+version = "0.0.1"
 dependencies = [
  "cc",
  "tree-sitter",

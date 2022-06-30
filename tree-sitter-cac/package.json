@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-caculator",
+  "name": "tree-sitter-cac",
   "version": "1.0.0",
   "description": "",
   "main": "bindings/node",
